@@ -40,7 +40,7 @@ const CartItem = () => {
            </div>
 
            <div>
-              <Button sx={{color:"RGB(145 85 253"}} >remove</Button>
+              <Button sx={{color:"RGB(145 85 253"}}>remove</Button>
            </div>
 
         </div>

@@ -1,16 +1,17 @@
 import React from 'react';
-import CartItem from './CartItem';
+import AddressCard from '../AddressCard/AddressCard';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import CartItem from '../Cart/CartItem';
 
-const Cart = () => {
-   const navigate = useNavigate();
-   const handleCheckout=()=>[
-      navigate("/checkout?step=2")
-   ]
+const OrderSummery = () => {
   return (
     <div>
-       <div className='lg:grid grid-cols-3 lg:px-16 relative'>
+       <div className='p-5 shadow-lg rounded-s-md border'>
+          <AddressCard/>
+       </div>
+
+       <div>
+       <div className='lg:grid grid-cols-3 relative'>
         <div className='col-span-2'>
            {[1,1,1,1].map((item)=><CartItem/>)}
          </div>
@@ -38,14 +39,16 @@ const Cart = () => {
                     </div>
                  </div>
 
-                 <Button onClick={handleCheckout} variant='contained' className='w-full mt-5' sx={{px:"2.5rem",py:".7rem",bgcolor:"#9155fd"}}>
+                 <Button variant='contained' className='w-full mt-5' sx={{px:"2.5rem",py:".7rem",bgcolor:"#9155fd"}}>
                     Checkout
                  </Button>
               </div>
           </div>
           </div>
     </div>
+
+    </div>
   );
 }
 
-export default Cart;
+export default OrderSummery;

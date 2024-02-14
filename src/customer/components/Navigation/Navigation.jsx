@@ -7,6 +7,7 @@ import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@her
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import { deepPurple } from '@mui/material/colors'
 import { navigation } from './navigationData'
+import { useNavigate } from 'react-router-dom'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -14,6 +15,7 @@ function classNames(...classes) {
 
 const Navigation = () => { 
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
 
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorE1, setAnchorE1] = useState(null);
@@ -35,11 +37,12 @@ const Navigation = () => {
   }
 
   const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.id}`);
     close();
   }
 
   return (
-    <div className="bg-white z-50">
+    <div className="bg-white z-50 mb-10">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -205,7 +208,7 @@ const Navigation = () => {
                   <span className="sr-only">Your Company</span>
                   <img
                     className="h-8 w-8 mr-2"
-                    src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png"
+                    src="https://t4.ftcdn.net/jpg/03/77/41/01/360_F_377410165_QPuy1Ao9uVSmmBZe2QUQ4kf1PPeJK0Ea.jpg"
                     alt="Showwithzosh"
                   />
                 </a>
@@ -329,7 +332,7 @@ const Navigation = () => {
                            <MenuItem onClick={handleCloseUserMenu}>
                              Profile
                            </MenuItem>
-                           <MenuItem>My Orders</MenuItem>
+                           <MenuItem onClick={()=>navigate("/account/order")} >My Orders</MenuItem>
                            <MenuItem>Logout</MenuItem>
                         </Menu>
                  
