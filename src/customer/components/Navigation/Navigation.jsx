@@ -19,7 +19,7 @@ function classNames(...classes) {
 
 const Navigation = () => { 
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch=useDispatch();
 
   const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -52,7 +52,7 @@ const Navigation = () => {
 
   useEffect(()=>{
     if(jwt){
-        dispatch(getUser())
+        dispatch(getUser(jwt))
     }
 },[jwt,auth.jwt])
 
