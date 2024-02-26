@@ -1,3 +1,5 @@
+import { api } from "../../config/apiConfig"
+
 import { FIND_PRODUCTS_FAILURE, FIND_PRODUCTS_REQUEST, FIND_PRODUCTS_SUCCESS, FIND_PRODUCT_BY_ID_REQUEST } from "./ActionType";
 
 export const findProducts = (reqData) => async (dispatch) => {
@@ -5,7 +7,8 @@ export const findProducts = (reqData) => async (dispatch) => {
     const {colors,sizes,minPrice,maxPrice,minDiscount,category,stock,sort,pageNumber,pagesize} = reqData;
 
     try {
-        const {data}=api.get(`/api/products/color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pagesize}`)
+        console.log("Product data: ",data)
+        const {data}=await api.get(`/api/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pagesize}`)
 
         dispatch({type:FIND_PRODUCTS_SUCCESS,payload:data})
     } catch (error) {
@@ -19,7 +22,7 @@ export const findProductsById = (reqData) => async (dispatch) => {
     const {productId} = reqData;
 
     try {
-        const {data}=api.get(`/api/products/id/${pro}`)
+        const {data}=await api.get(`/api/products/id/${productId}`)
 
         dispatch({type:FIND_PRODUCTS_SUCCESS,payload:data})
     } catch (error) {

@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { Box, Button, Grid, LinearProgress, Rating } from '@mui/material'
@@ -7,7 +7,9 @@ import ProductReviewCard from './ProductReviewCard'
 import { yellow } from '@mui/material/colors'
 import { mens_kurta } from '../../../Data/mens_kurta'
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { findProductsById } from '../../../State/Product/Action'
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -69,10 +71,17 @@ export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const navigate= useNavigate();
+  const params=useParams()
+  const dispatch=useDispatch();
 
   const handleAddToCart=()=>{
      navigate("/cart")
   }
+
+  useEffect(()=>{
+    const data={productId:params.productId}
+    dispatch(findProductsById(data))
+  },[params.productId])
 
   return (
     <div className="bg-white lg:px-20">
