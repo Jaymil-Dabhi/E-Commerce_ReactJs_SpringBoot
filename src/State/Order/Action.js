@@ -1,6 +1,6 @@
 import { CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, GET_ORDER_BY_ID_FAILURE, GET_ORDER_BY_ID_REQUEST, GET_ORDER_BY_ID_SUCCESS } from "./ActionType";
 
-
+import { api } from "../../config/apiConfig"
 
 export const createOrder = (reqData) => async (dispatch) => {
       dispatch({ type: CREATE_ORDER_REQUEST });
@@ -28,8 +28,10 @@ export const createOrder = (reqData) => async (dispatch) => {
 
 export const getOrderById = (orderId) => async (dispatch) => {
     dispatch({ type: GET_ORDER_BY_ID_REQUEST });
+    // console.log("orderId:",orderId);
     try {
-        const { data } = await api.get(`/api/orders/${orderId}`,);
+        // console.log("orderId:",orderId);
+        const { data } = await api.get(`/api/orders/${orderId}`,orderId);
         console.log("order by id: ",data);
         dispatch({
             type: GET_ORDER_BY_ID_SUCCESS,
